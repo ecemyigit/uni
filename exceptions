@@ -1,0 +1,80 @@
+/* Create a program that stores date of birth as a class object (you can use inheritance) and then check if the date is correct.
+To fit our time limit, assume that every month can be 31 days long. For the year of birth, use the range from 1900 to 2021.
+Make the exceptions in such a way, that it will be possible for the user to distinguish which part of the date is actually wrong. */
+
+#include <iostream>
+
+using namespace std;
+
+class Date
+{
+public:
+  int ddnum;
+  int mmnum;
+  int yyyynum;
+  Date(int a, int b, int c)
+  {
+    ddnum = a;
+    mmnum = b;
+    yyyynum = c;
+  }
+  void printdate()
+  {
+    bool ifcatch=false;
+    try
+    {
+      if (ddnum<1 || ddnum>31)
+      {
+        throw 1;
+      }
+    }
+    catch (int number)
+    {
+  	  cout << "Exception code " << number << endl;
+      ifcatch=true;
+    }
+    try
+    {
+      if (mmnum<1 || mmnum>12)
+      {
+        throw 2;
+      }
+    }
+    catch (int number)
+    {
+  	  cout << "Exception code " << number << endl;
+      ifcatch=true;
+    }
+    try
+    {
+      if (yyyynum>2021 || yyyynum<1900)
+      {
+        throw 3;
+      }
+    }
+    catch (int number) 
+    {
+  	  cout << "Exception code " << number << endl;
+      ifcatch=true;
+    }
+    if (ifcatch==false)
+    {
+      cout << ddnum << "." << mmnum << "." << yyyynum << endl;
+    }
+  }
+  ~Date()
+  {}
+};
+
+int main() 
+{
+  int dd, mm, yyyy;
+  cout << "Enter the day you were born: " << endl;
+  cin >> dd;
+  cout << "Enter the month you were born: " << endl;
+  cin >> mm;
+  cout << "Enter the year you were born: " << endl;
+  cin >> yyyy;
+  Date D(dd,mm,yyyy);
+  D.printdate();
+} 
