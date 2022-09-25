@@ -1,0 +1,72 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+#define SIZE 10
+
+template <class T> class MyStack {
+private:
+    int top;
+    T stack[SIZE];
+public:
+    MyStack();
+    void push(T x);
+    T pop();
+    int size();
+    void print();
+
+    // to check stack overflow
+    bool isFull();
+    // to check stack underflow
+    bool isEmpty();
+};
+
+template <class T> MyStack<T>::MyStack() { top = -1; }
+
+template <class T> void MyStack<T>::push(T x) {
+
+    // Checking stack overflow
+    if (isFull()) cout << "Class is full \n";
+    cout << "Inserted" << x << "\n";
+    top++;
+    stack[top] = x;
+}
+
+template <class T> T MyStack<T>::pop() {
+    T popped_element = stack[top];
+    top--;
+    return popped_element;
+}
+
+template <class T> int MyStack<T>::size() {
+    return top + 1;
+}
+
+template <class T> void MyStack<T>::print() {
+    if (isEmpty()) cout << "Stack is empty";
+    else for (int i = 0; i <= top; i++) cout << stack[i] << " ";
+    cout << "\n";
+}
+
+template <class T> bool MyStack<T>::isEmpty() {
+    if (top == -1) return 1;
+    else return 0;
+}
+
+template <class T> bool MyStack<T>::isFull() {
+    if (top == (SIZE - 1)) return 1;
+    else return 0;
+}
+int main() {
+    MyStack<int> ints;
+    ints.push(5);
+    ints.push(27);
+    ints.push(40);
+    ints.push(67);
+    ints.push(34);
+    cout << ints.pop() << " is removed from stack\n";
+    ints.print();
+    cout << "There are " << ints.size() << " elements in stack\n";
+
+    return 0;
+}
